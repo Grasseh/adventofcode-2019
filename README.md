@@ -20,3 +20,11 @@ Then enter the number of the problem on the prompt
 ## Tests
 
 `rspec`
+
+## Benchmarking
+
+`ruby benchmark.rb`
+
+To output it in the file
+
+`ruby benchmark.rb >benchmark.txt`

@@ -1,0 +1,4 @@
+Reporting each test ran 100 times
+                      user     system      total        real
+Problem #0A:      0.000569   0.000067   0.000636 (  0.000631)
+Problem #0B:      0.308800   0.000000   0.308800 (  0.308860)
