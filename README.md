@@ -11,5 +11,10 @@ Rspec
 
 ## Usage
 
+`ruby main.rb`
+
+Then enter the number of the problem on the prompt
+
 ## Tests
 
+`rspec`
