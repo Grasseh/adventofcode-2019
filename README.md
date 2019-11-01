@@ -1,5 +1,7 @@
 # Advent of Code 2019
 
+[![Actions Status](https://github.com/grasseh/adventofcode-2019/workflows/ruby/badge.svg)](https://github.com/grasseh/adventofcode-2019/actions)
+
 Contains my personal solutions to Advent of code problems.
 
 Advent of code is hosted on http://adventofcode.comAdvent of Code 2018
