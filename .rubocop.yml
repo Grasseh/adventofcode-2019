@@ -1,0 +1,56 @@
+AllCops:
+  TargetRubyVersion: 2.6.2
+
+Layout/AlignArguments:
+  EnforcedStyle: with_fixed_indentation
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+Layout/CaseIndentation:
+  EnforcedStyle: end
+  IndentOneStep: true
+Layout/DotPosition:
+  EnforcedStyle: leading
+Layout/IndentArray:
+  EnforcedStyle: consistent
+Layout/IndentFirstArrayElement:
+  EnforcedStyle: consistent
+Layout/IndentFirstHashElement:
+  EnforcedStyle: consistent
+Layout/IndentHash:
+  EnforcedStyle: consistent
+Layout/MultilineOperationIndentation:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Lint/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Metrics/CyclomaticComplexity:
+  Max: 80000
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/LineLength:
+  Max: 80
+  AllowURI: true
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/ClassCheck:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/FormatStringToken:
+  EnforcedStyle: template
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+Style/RaiseArgs:
+  Enabled: false
