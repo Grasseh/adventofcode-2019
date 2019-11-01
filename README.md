@@ -1,6 +1,6 @@
 # Advent of Code 2019
 
-[![Actions Status](https://github.com/grasseh/adventofcode-2019/workflows/ruby/badge.svg)](https://github.com/grasseh/adventofcode-2019/actions)
+[![Actions Status](https://github.com/grasseh/adventofcode-2019/workflows/Ruby/badge.svg)](https://github.com/grasseh/adventofcode-2019/actions)
 
 Contains my personal solutions to Advent of code problems.
 
