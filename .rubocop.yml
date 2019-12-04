@@ -10,22 +10,24 @@ Layout/CaseIndentation:
   IndentOneStep: true
 Layout/DotPosition:
   EnforcedStyle: leading
-Layout/IndentArray:
-  EnforcedStyle: consistent
 Layout/IndentFirstArrayElement:
   EnforcedStyle: consistent
 Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
-Layout/IndentHash:
+Layout/IndentFirstArgument:
   EnforcedStyle: consistent
 Layout/MultilineOperationIndentation:
   Enabled: false
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
 
 Lint/EndAlignment:
   EnforcedStyleAlignWith: variable
 
+Metrics/AbcSize:
+  Enabled: false
 Metrics/CyclomaticComplexity:
   Max: 80000
 Metrics/BlockLength:
@@ -52,5 +54,15 @@ Style/FormatStringToken:
   EnforcedStyle: template
 Style/MethodCallWithArgsParentheses:
   Enabled: true
+  IgnoredMethods:
+    - 'context'
+    - 'describe'
+    - 'expect'
+    - 'include'
+    - 'it'
+    - 'puts'
+    - 'to'
+    - 'require'
+    - 'require_relative'
 Style/RaiseArgs:
   Enabled: false

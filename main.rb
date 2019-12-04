@@ -11,5 +11,5 @@ solver = eval("Solvers::Solver#{number}").new
 
 input = File.open("inputs/#{number}.txt").readlines
 
-puts solver.solve_a input
-puts solver.solve_b input
+puts solver.solve_a(input)
+puts solver.solve_b(input)

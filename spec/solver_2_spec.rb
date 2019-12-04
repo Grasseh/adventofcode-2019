@@ -20,7 +20,9 @@ RSpec.describe Solvers::Solver2 do
   context 'Problem B' do
     it' Does 100 * Noun + Verb' do
       expect(@solver.solve_b(wrap_line_input(
-        [1,0,0,9,2,9,10,0,99,0,984536,0,18].fill(999, 13..99).join(',')
+        [1, 0, 0, 9, 2, 9, 10, 0, 99, 0, 984_536, 0, 18]
+          .fill(999, 13..99)
+          .join(',')
       ))).to eq(1202)
     end
   end
@@ -51,8 +53,5 @@ RSpec.describe Solvers::Solver2 do
       expect(@solver.compute('1,1,1,4,99,5,6,0,99'.split(',').map(&:to_i)))
         .to eq('30,1,1,4,2,5,6,0,99'.split(',').map(&:to_i))
     end
-  end
-
-  context 'Problem B' do
   end
 end

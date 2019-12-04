@@ -16,8 +16,8 @@ RSpec.describe Solvers::Solver1 do
     end
 
     it 'calculates the sum correctly' do
-      expect(@solver.solve_a(wrap_array_input(12, 14, 1969, 100756)))
-        .to eq(34241)
+      expect(@solver.solve_a(wrap_array_input(12, 14, 1969, 100_756)))
+        .to eq(34_241)
     end
   end
 
@@ -31,8 +31,8 @@ RSpec.describe Solvers::Solver1 do
     end
 
     it 'calculates the sum correctly' do
-      expect(@solver.solve_b(wrap_array_input(12, 14, 1969, 100756)))
-        .to eq(51316)
+      expect(@solver.solve_b(wrap_array_input(12, 14, 1969, 100_756)))
+        .to eq(51_316)
     end
   end
 end
