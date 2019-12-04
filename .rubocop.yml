@@ -43,7 +43,7 @@ Metrics/ModuleLength:
   Enabled: false
 
 Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
+  EnforcedStyle: nested
 Style/ClassCheck:
   Enabled: false
 Style/Documentation:
