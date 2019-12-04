@@ -30,6 +30,8 @@ Metrics/AbcSize:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Max: 80000
+Metrics/PerceivedComplexity:
+  Max: 80000
 Metrics/BlockLength:
   Enabled: false
 Metrics/ClassLength:
