@@ -9,7 +9,7 @@ Benchmark.bm(15) do |x|
     .map{ |file| File.basename(file, '.*') }
     .each do |number|
       require_relative "solvers/solver_#{number}.rb"
-      solver = eval('Solvers::Solver#{number}').new
+      solver = eval("Solvers::Solver#{number}").new
       input = File.open("inputs/#{number}.txt").readlines
 
       x.report("Problem ##{number}A:") do

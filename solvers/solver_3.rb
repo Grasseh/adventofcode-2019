@@ -56,14 +56,14 @@ module Solvers
       line.each do |line_movement|
         line_movement.dig(:distance).times do
           case line_movement.dig(:direction)
-          when 'R'
-            x += 1
-          when 'L'
-            x -= 1
-          when 'U'
-            y += 1
-          when 'D'
-            y -= 1
+            when 'R'
+              x += 1
+            when 'L'
+              x -= 1
+            when 'U'
+              y += 1
+            when 'D'
+              y -= 1
           end
 
           passed_count[[x, y]] ||= increment ? i : 1
