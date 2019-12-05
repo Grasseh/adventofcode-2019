@@ -1,5 +1,6 @@
 require_relative '../solvers/solver_2.rb'
 require_relative './spec_helper.rb'
+require_relative '../solvers/lib/opcode.rb'
 
 RSpec.configure do |c|
   c.include Helpers
@@ -30,28 +31,42 @@ RSpec.describe Solvers::Solver2 do
   context '#computer' do
     it 'calculates one data correctly' do
       expect(
-        @solver.compute('1,9,10,3,2,3,11,0,99,30,40,50'.split(',').map(&:to_i))
+        Helpers::OpcodeComputer
+          .new('1,9,10,3,2,3,11,0,99,30,40,50'.split(',').map(&:to_i))
+          .compute
       ).to eq([3500, 9, 10, 70, 2, 3, 11, 0, 99, 30, 40, 50])
     end
 
     it 'changes the state correctly with a 1-code' do
-      expect(@solver.compute('1,0,0,0,99'.split(',').map(&:to_i)))
-        .to eq([2, 0, 0, 0, 99])
+      expect(
+        Helpers::OpcodeComputer
+          .new('1,0,0,0,99'.split(',').map(&:to_i))
+          .compute
+      ).to eq([2, 0, 0, 0, 99])
     end
 
     it 'changes the state correctly with a 2-code' do
-      expect(@solver.compute('2,3,0,3,99'.split(',').map(&:to_i)))
-        .to eq([2, 3, 0, 6, 99])
+      expect(
+        Helpers::OpcodeComputer
+          .new('2,3,0,3,99'.split(',').map(&:to_i))
+          .compute
+      ).to eq([2, 3, 0, 6, 99])
     end
 
     it 'changes the state correctly with something further' do
-      expect(@solver.compute('2,4,4,5,99,0'.split(',').map(&:to_i)))
-        .to eq([2, 4, 4, 5, 99, 9801])
+      expect(
+        Helpers::OpcodeComputer
+          .new('2,4,4,5,99,0'.split(',').map(&:to_i))
+          .compute
+      ).to eq([2, 4, 4, 5, 99, 9801])
     end
 
     it 'changes the state correctly with three commands' do
-      expect(@solver.compute('1,1,1,4,99,5,6,0,99'.split(',').map(&:to_i)))
-        .to eq('30,1,1,4,2,5,6,0,99'.split(',').map(&:to_i))
+      expect(
+        Helpers::OpcodeComputer
+        .new('1,1,1,4,99,5,6,0,99'.split(',').map(&:to_i))
+        .compute
+      ).to eq('30,1,1,4,2,5,6,0,99'.split(',').map(&:to_i))
     end
   end
 end

@@ -1,3 +1,5 @@
+require_relative 'lib/opcode.rb'
+
 module Solvers
   class Solver2
     def solve_a(input)
@@ -5,7 +7,7 @@ module Solvers
       input[1] = 12
       input[2] = 2
 
-      compute(input).first
+      Helpers::OpcodeComputer.new(input).compute.first
     end
 
     def solve_b(input)
@@ -24,7 +26,7 @@ module Solvers
           copy[1] = noun
           copy[2] = verb
 
-          val = compute(copy).first
+          val = Helpers::OpcodeComputer.new(copy).compute.first
 
           break if val == 19_690_720
         end
@@ -35,39 +37,5 @@ module Solvers
       100 * noun + verb
     end
 
-    def compute(program)
-      i = 0
-
-      operations = {
-        1 => { op: method(:op_1), inc: 4 },
-        2 => { op: method(:op_2), inc: 4 }
-      }
-
-      loop do
-        operation = program[i]
-
-        break unless operations.key?(operation)
-
-        program = operations.dig(operation, :op).call(program, i)
-
-        i += operations.dig(operation, :inc)
-      end
-
-      program
-    end
-
-    def op_1(program, position)
-      program[program[position + 3]] = program[program[position + 1]] +
-        program[program[position + 2]]
-
-      program
-    end
-
-    def op_2(program, position)
-      program[program[position + 3]] = program[program[position + 1]] *
-        program[program[position + 2]]
-
-      program
-    end
   end
 end
