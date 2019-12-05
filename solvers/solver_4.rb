@@ -1,4 +1,3 @@
-require('pry')
 module Solvers
   class Solver4
     def solve_a(input)
