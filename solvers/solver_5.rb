@@ -1,13 +1,23 @@
-require('pry')
+require_relative 'lib/opcode.rb'
+
 module Solvers
   class Solver5
     def solve_a(input)
       input = input.first.chomp.split(',').map(&:to_i)
 
-      Helpers::OpcodeComputer.new(input).compute(input: 1)
+      computer = Helpers::OpcodeComputer.new(input)
+      computer.compute(input: 1)
+
+      computer.output.last
     end
 
     def solve_b(input)
+      input = input.first.chomp.split(',').map(&:to_i)
+
+      computer = Helpers::OpcodeComputer.new(input)
+      computer.compute(input: 5)
+
+      computer.output.last
     end
   end
 end

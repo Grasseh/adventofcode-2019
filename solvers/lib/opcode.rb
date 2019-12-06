@@ -3,28 +3,27 @@ module Helpers
     attr_accessor :output
 
     def initialize(program)
-      @operations = {
-        1 => { op: method(:op_1), inc: 4 },
-        2 => { op: method(:op_2), inc: 4 },
-        3 => { op: method(:op_3), inc: 2 },
-        4 => { op: method(:op_4), inc: 2 }
-      }
+      @operations = {}
 
+      8.times do |i|
+        index = i + 1
+        @operations[index] = method("op_#{index}".to_sym)
+      end
+
+      @pointer = 0
       @program = program
       @output = []
     end
 
     def compute(opts = {})
-      i = 0
+      @pointer = 0
 
       loop do
-        operation, modes = parse_command(@program[i])
+        operation, modes = parse_command(@program[@pointer])
 
         break unless @operations.key?(operation)
 
-        @operations.dig(operation, :op).call(i, modes, opts)
-
-        i += @operations.dig(operation, :inc)
+        @operations.dig(operation).call(@pointer, modes, opts)
       end
 
       @program
@@ -53,6 +52,8 @@ module Helpers
       a = get_value_at(position + 1, modes[0])
       b = get_value_at(position + 2, modes[1])
 
+      @pointer += 4
+
       @program[@program[position + 3]] = a + b
     end
 
@@ -60,17 +61,63 @@ module Helpers
       a = get_value_at(position + 1, modes[0])
       b = get_value_at(position + 2, modes[1])
 
+      @pointer += 4
+
       @program[@program[position + 3]] = a * b
     end
 
     def op_3(position, _modes, opts)
+      @pointer += 2
+
       @program[@program[position + 1]] = opts.fetch(:input)
     end
 
     def op_4(position, modes, _)
+      @pointer += 2
+
       a = get_value_at(position + 1, modes[0])
 
       @output << a
+    end
+
+    def op_5(position, modes, _)
+      a = get_value_at(position + 1, modes[0])
+      b = get_value_at(position + 2, modes[1])
+
+      if !a.zero?
+        @pointer = b
+      else
+        @pointer += 3
+      end
+    end
+
+    def op_6(position, modes, _)
+      a = get_value_at(position + 1, modes[0])
+      b = get_value_at(position + 2, modes[1])
+
+      if a.zero?
+        @pointer = b
+      else
+        @pointer += 3
+      end
+    end
+
+    def op_7(position, modes, _)
+      a = get_value_at(position + 1, modes[0])
+      b = get_value_at(position + 2, modes[1])
+
+      @program[@program[position + 3]] = a < b ? 1 : 0
+
+      @pointer += 4
+    end
+
+    def op_8(position, modes, _)
+      a = get_value_at(position + 1, modes[0])
+      b = get_value_at(position + 2, modes[1])
+
+      @program[@program[position + 3]] = a == b ? 1 : 0
+
+      @pointer += 4
     end
   end
 end
