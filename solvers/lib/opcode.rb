@@ -1,6 +1,11 @@
 module Helpers
   class OpcodeComputer
+    RUNNING_STATE = 0
+    WAIT_STATE = 1
+    HALT_STATE = 99
+
     attr_accessor :output
+    attr_accessor :state
 
     def initialize(program)
       @operations = {}
@@ -15,24 +20,34 @@ module Helpers
 
     def compute(opts = {})
       @pointer = 0
-      @input_index = 0
       @program = @base_program.dup
       @output = []
+      @input = []
+      @opts = opts
+      @state = RUNNING_STATE
 
-      loop do
-        operation, modes = parse_command(@program[@pointer])
-
-        break unless @operations.key?(operation)
-
-        @operations.dig(operation).call(@pointer, modes, opts)
-      end
+      resume(opts)
 
       @program
     end
 
+    def resume(opts = {})
+      @input.concat(opts.fetch(:input, [])).flatten!
+      @output = []
+      @state = RUNNING_STATE
+
+      loop do
+        operation, modes = parse_command(@program[@pointer])
+
+        @state = HALT_STATE unless @operations.key?(operation)
+        break unless @state == RUNNING_STATE
+
+        @operations.dig(operation).call(@pointer, modes, @opts)
+        break unless @state == RUNNING_STATE
+      end
+    end
+
     def parse_command(command)
-      # The integer here should be the highest amount of parameters an op
-      # can take + 1
       justified_command = command.to_s.rjust(5, '0')
 
       operation = justified_command[-2..-1]
@@ -67,12 +82,13 @@ module Helpers
       @program[@program[position + 3]] = a * b
     end
 
-    def op_3(position, _modes, opts)
+    def op_3(position, _modes, _opts)
+      @state = WAIT_STATE if @input.empty?
+      return if @input.empty?
+
       @pointer += 2
 
-      @program[@program[position + 1]] = opts.fetch(:input)[@input_index]
-
-      @input_index += 1
+      @program[@program[position + 1]] = @input.shift
     end
 
     def op_4(position, modes, _)
