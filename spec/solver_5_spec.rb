@@ -35,7 +35,7 @@ RSpec.describe Solvers::Solver5 do
       expect(
         Helpers::OpcodeComputer
           .new('3,6,99,0,0,0,0'.split(',').map(&:to_i))
-          .compute(input: 12)
+          .compute(input: [12])
       ).to eq([3, 6, 99, 0, 0, 0, 12])
     end
 
@@ -50,7 +50,7 @@ RSpec.describe Solvers::Solver5 do
       expect(
         Helpers::OpcodeComputer
           .new('1001,2,12,9,102,20,3,10,99,0,0'.split(',').map(&:to_i))
-          .compute(input: 12)
+          .compute(input: [12])
       ).to eq([1001, 2, 12, 9, 102, 20, 3, 10, 99, 24, 180])
     end
 
@@ -73,92 +73,92 @@ RSpec.describe Solvers::Solver5 do
     it 'checks if input equals 8 with position mode' do
       computer = Helpers::OpcodeComputer
         .new('3,9,8,9,10,9,4,9,99,-1,8'.split(',').map(&:to_i))
-      computer.compute(input: 8)
+      computer.compute(input: [8])
       expect(computer.output).to eq([1])
 
       computer = Helpers::OpcodeComputer
         .new('3,9,8,9,10,9,4,9,99,-1,8'.split(',').map(&:to_i))
-      computer.compute(input: 9)
+      computer.compute(input: [9])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,9,8,9,10,9,4,9,99,-1,8'.split(',').map(&:to_i))
-      computer.compute(input: 7)
+      computer.compute(input: [7])
       expect(computer.output).to eq([0])
     end
 
     it 'checks if input is less than 8 with position mode' do
       computer = Helpers::OpcodeComputer
         .new('3,9,7,9,10,9,4,9,99,-1,8'.split(',').map(&:to_i))
-      computer.compute(input: 8)
+      computer.compute(input: [8])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,9,7,9,10,9,4,9,99,-1,8'.split(',').map(&:to_i))
-      computer.compute(input: 9)
+      computer.compute(input: [9])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,9,7,9,10,9,4,9,99,-1,8'.split(',').map(&:to_i))
-      computer.compute(input: 7)
+      computer.compute(input: [7])
       expect(computer.output).to eq([1])
     end
 
     it 'checks if input equals 8 with immediate mode' do
       computer = Helpers::OpcodeComputer
         .new('3,3,1108,-1,8,3,4,3,99'.split(',').map(&:to_i))
-      computer.compute(input: 8)
+      computer.compute(input: [8])
       expect(computer.output).to eq([1])
 
       computer = Helpers::OpcodeComputer
         .new('3,3,1108,-1,8,3,4,3,99'.split(',').map(&:to_i))
-      computer.compute(input: 9)
+      computer.compute(input: [9])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,3,1108,-1,8,3,4,3,99'.split(',').map(&:to_i))
-      computer.compute(input: 7)
+      computer.compute(input: [7])
       expect(computer.output).to eq([0])
     end
 
     it 'checks if input is less than 8 with immediate mode' do
       computer = Helpers::OpcodeComputer
         .new('3,3,1107,-1,8,3,4,3,99'.split(',').map(&:to_i))
-      computer.compute(input: 8)
+      computer.compute(input: [8])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,3,1107,-1,8,3,4,3,99'.split(',').map(&:to_i))
-      computer.compute(input: 9)
+      computer.compute(input: [9])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,3,1107,-1,8,3,4,3,99'.split(',').map(&:to_i))
-      computer.compute(input: 7)
+      computer.compute(input: [7])
       expect(computer.output).to eq([1])
     end
 
     it 'works with jump-mode in position mode' do
       computer = Helpers::OpcodeComputer
         .new('3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9'.split(',').map(&:to_i))
-      computer.compute(input: 0)
+      computer.compute(input: [0])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9'.split(',').map(&:to_i))
-      computer.compute(input: 12)
+      computer.compute(input: [12])
       expect(computer.output).to eq([1])
     end
 
     it 'works with jump-mode in immediate mode' do
       computer = Helpers::OpcodeComputer
         .new('3,3,1105,-1,9,1101,0,0,12,4,12,99,1'.split(',').map(&:to_i))
-      computer.compute(input: 0)
+      computer.compute(input: [0])
       expect(computer.output).to eq([0])
 
       computer = Helpers::OpcodeComputer
         .new('3,3,1105,-1,9,1101,0,0,12,4,12,99,1'.split(',').map(&:to_i))
-      computer.compute(input: 12)
+      computer.compute(input: [12])
       expect(computer.output).to eq([1])
     end
   end

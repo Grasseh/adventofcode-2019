@@ -10,13 +10,14 @@ module Helpers
         @operations[index] = method("op_#{index}".to_sym)
       end
 
-      @pointer = 0
-      @program = program
-      @output = []
+      @base_program = program
     end
 
     def compute(opts = {})
       @pointer = 0
+      @input_index = 0
+      @program = @base_program.dup
+      @output = []
 
       loop do
         operation, modes = parse_command(@program[@pointer])
@@ -69,7 +70,9 @@ module Helpers
     def op_3(position, _modes, opts)
       @pointer += 2
 
-      @program[@program[position + 1]] = opts.fetch(:input)
+      @program[@program[position + 1]] = opts.fetch(:input)[@input_index]
+
+      @input_index += 1
     end
 
     def op_4(position, modes, _)

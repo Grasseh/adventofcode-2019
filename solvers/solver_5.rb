@@ -6,7 +6,7 @@ module Solvers
       input = input.first.chomp.split(',').map(&:to_i)
 
       computer = Helpers::OpcodeComputer.new(input)
-      computer.compute(input: 1)
+      computer.compute(input: [1])
 
       computer.output.last
     end
@@ -15,7 +15,7 @@ module Solvers
       input = input.first.chomp.split(',').map(&:to_i)
 
       computer = Helpers::OpcodeComputer.new(input)
-      computer.compute(input: 5)
+      computer.compute(input: [5])
 
       computer.output.last
     end
