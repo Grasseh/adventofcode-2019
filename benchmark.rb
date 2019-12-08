@@ -14,13 +14,13 @@ Benchmark.bm(15) do |x|
 
       x.report("Problem ##{number}A:") do
         100.times do
-          solver.solve_a(input)
+          solver.solve_a(input, print: false)
         end
       end
 
       x.report("Problem ##{number}B:") do
         100.times do
-          solver.solve_b(input)
+          solver.solve_b(input, print: false)
         end
       end
     end
