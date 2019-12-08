@@ -2,7 +2,7 @@ require_relative 'lib/opcode.rb'
 
 module Solvers
   class Solver2
-    def solve_a(input, _)
+    def solve_a(input, _opts = {})
       input = input.first.chomp.split(',').map(&:to_i)
       input[1] = 12
       input[2] = 2
@@ -10,7 +10,7 @@ module Solvers
       Helpers::OpcodeComputer.new(input).compute.first
     end
 
-    def solve_b(input, _)
+    def solve_b(input, _opts = {})
       input = input.first.chomp.split(',').map(&:to_i)
 
       noun = 0

@@ -1,6 +1,6 @@
 module Solvers
   class Solver3
-    def solve_a(input, _)
+    def solve_a(input, _opts = {})
       first_line = input.first.chomp.split(',').map{ |x| generate_moves(x) }
       second_line = input[1].chomp.split(',').map{ |x| generate_moves(x) }
 
@@ -20,7 +20,7 @@ module Solvers
       manhattan_zero(closest)
     end
 
-    def solve_b(input, _)
+    def solve_b(input, _opts = {})
       first_line = input.first.chomp.split(',').map{ |x| generate_moves(x) }
       second_line = input[1].chomp.split(',').map{ |x| generate_moves(x) }
 

@@ -2,7 +2,7 @@ require_relative 'lib/opcode.rb'
 
 module Solvers
   class Solver7
-    def solve_a(input, _)
+    def solve_a(input, _opts = {})
       input = input.first.chomp.split(',').map(&:to_i)
 
       computer = Helpers::OpcodeComputer.new(input)
@@ -24,7 +24,7 @@ module Solvers
       highest_amplifier
     end
 
-    def solve_b(input, _)
+    def solve_b(input, _opts = {})
       input = input.first.chomp.split(',').map(&:to_i)
 
       phase_inputs = [5, 6, 7, 8, 9]

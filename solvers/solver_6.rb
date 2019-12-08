@@ -1,6 +1,6 @@
 module Solvers
   class Solver6
-    def solve_a(input, _)
+    def solve_a(input, _opts = {})
       orbits = generate_orbits(input)
       current_stack = %i[COM]
       next_stack = []
@@ -25,7 +25,7 @@ module Solvers
       orbit_count
     end
 
-    def solve_b(input, _)
+    def solve_b(input, _opts = {})
       orbits = generate_orbits(input)
       start_point = orbits.find{ |_, v| v.include?(:YOU) }.first
       end_point = orbits.find{ |_, v| v.include?(:SAN) }.first

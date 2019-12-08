@@ -1,12 +1,12 @@
 module Solvers
   class Solver1
-    def solve_a(input, _)
+    def solve_a(input, _opts = {})
       input = input.map(&:chomp).map(&:to_i)
 
       input.reduce(0){ |sum, line| sum + calculate_mass(line) }
     end
 
-    def solve_b(input, _)
+    def solve_b(input, _opts = {})
       input = input.map(&:chomp).map(&:to_i)
 
       input.reduce(0){ |sum, line| sum + calculate_fuel(line) }
