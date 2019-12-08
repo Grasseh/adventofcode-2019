@@ -1,12 +1,12 @@
 require('pry')
 module Solvers
   class Solver0
-    def solve_a(input)
+    def solve_a(input, _)
       input = input.first.chomp
       input.count('(') - input.count(')')
     end
 
-    def solve_b(input)
+    def solve_b(input, _)
       input = input.first.chomp
 
       input.length.times do |i|
