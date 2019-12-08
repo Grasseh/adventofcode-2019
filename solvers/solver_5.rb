@@ -2,7 +2,7 @@ require_relative 'lib/opcode.rb'
 
 module Solvers
   class Solver5
-    def solve_a(input)
+    def solve_a(input, _)
       input = input.first.chomp.split(',').map(&:to_i)
 
       computer = Helpers::OpcodeComputer.new(input)
@@ -11,7 +11,7 @@ module Solvers
       computer.output.last
     end
 
-    def solve_b(input)
+    def solve_b(input, _)
       input = input.first.chomp.split(',').map(&:to_i)
 
       computer = Helpers::OpcodeComputer.new(input)
