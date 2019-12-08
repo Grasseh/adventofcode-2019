@@ -1,13 +1,13 @@
 module Solvers
   class Solver4
-    def solve_a(input)
+    def solve_a(input, _)
       min = input.first.chomp.to_i
       max = input[1].chomp.to_i
 
       get_valid_passwords(min, max).count
     end
 
-    def solve_b(input)
+    def solve_b(input, _)
       min = input.first.chomp.to_i
       max = input[1].chomp.to_i
 
