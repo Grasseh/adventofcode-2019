@@ -10,7 +10,7 @@ module Helpers
     def initialize(program)
       @operations = {}
 
-      8.times do |i|
+      9.times do |i|
         index = i + 1
         @operations[index] = method("op_#{index}".to_sym)
       end
@@ -58,20 +58,22 @@ module Helpers
     end
 
     def get_value_at(position, mode)
-      if mode.zero?
+      value = if mode.zero?
         @program[@program[position]]
       elsif mode == 1
         @program[position]
       elsif mode == 2
-        @program[@relative_pointer + position]
+        @program[@relative_pointer + @program[position]]
       end
+
+      value || 0
     end
 
     def set_value_at(position, mode, value)
       if mode.zero? || mode == 1
         @program[@program[position]] = value
       else
-        @program[@relative_pointer + position] = value
+        @program[@relative_pointer + @program[position]] = value
       end
     end
 
@@ -144,6 +146,14 @@ module Helpers
       set_value_at(position + 3, modes[2], a == b ? 1 : 0)
 
       @pointer += 4
+    end
+
+    def op_9(position, modes, _)
+      a = get_value_at(position + 1, modes[0])
+
+      @relative_pointer += a
+
+      @pointer += 2
     end
   end
 end
