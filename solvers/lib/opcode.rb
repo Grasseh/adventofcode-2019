@@ -20,6 +20,7 @@ module Helpers
 
     def compute(opts = {})
       @pointer = 0
+      @relative_pointer = 0
       @program = @base_program.dup
       @output = []
       @input = []
@@ -59,44 +60,52 @@ module Helpers
     def get_value_at(position, mode)
       if mode.zero?
         @program[@program[position]]
-      else
+      elsif mode == 1
         @program[position]
+      elsif mode == 2
+        @program[@relative_pointer + position]
+      end
+    end
+
+    def set_value_at(position, mode, value)
+      if mode.zero? || mode == 1
+        @program[@program[position]] = value
+      else
+        @program[@relative_pointer + position] = value
       end
     end
 
     def op_1(position, modes, _opts)
       a = get_value_at(position + 1, modes[0])
       b = get_value_at(position + 2, modes[1])
+      set_value_at(position + 3, modes[2], a + b)
 
       @pointer += 4
-
-      @program[@program[position + 3]] = a + b
     end
 
     def op_2(position, modes, _opts)
       a = get_value_at(position + 1, modes[0])
       b = get_value_at(position + 2, modes[1])
+      set_value_at(position + 3, modes[2], a * b)
 
       @pointer += 4
-
-      @program[@program[position + 3]] = a * b
     end
 
-    def op_3(position, _modes, _opts)
+    def op_3(position, modes, _opts)
       @state = WAIT_STATE if @input.empty?
       return if @input.empty?
 
-      @pointer += 2
+      set_value_at(position + 1, modes[0], @input.shift)
 
-      @program[@program[position + 1]] = @input.shift
+      @pointer += 2
     end
 
     def op_4(position, modes, _)
-      @pointer += 2
-
       a = get_value_at(position + 1, modes[0])
 
       @output << a
+
+      @pointer += 2
     end
 
     def op_5(position, modes, _)
@@ -124,8 +133,7 @@ module Helpers
     def op_7(position, modes, _)
       a = get_value_at(position + 1, modes[0])
       b = get_value_at(position + 2, modes[1])
-
-      @program[@program[position + 3]] = a < b ? 1 : 0
+      set_value_at(position + 3, modes[2], a < b ? 1 : 0)
 
       @pointer += 4
     end
@@ -133,8 +141,7 @@ module Helpers
     def op_8(position, modes, _)
       a = get_value_at(position + 1, modes[0])
       b = get_value_at(position + 2, modes[1])
-
-      @program[@program[position + 3]] = a == b ? 1 : 0
+      set_value_at(position + 3, modes[2], a == b ? 1 : 0)
 
       @pointer += 4
     end
