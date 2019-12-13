@@ -1,3 +1,5 @@
+require_relative './lib/printer.rb'
+
 module Solvers
   class Solver8
     def solve_a(input, opts = {})
@@ -39,23 +41,8 @@ module Solvers
         end
       end
 
-      pretty_print(answer, width) if print
+      Helpers::Printer::grid_print(answer, width) if print
       answer.join('')
-    end
-
-    def pretty_print(grid, width)
-      white = '▓'
-      black = '░'
-
-      grid.each_slice(width) do |line|
-        string = ''
-
-        line.each do |char|
-          string += char.zero? ? black : white
-        end
-
-        puts string
-      end
     end
   end
 end
