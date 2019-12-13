@@ -36,11 +36,13 @@ module Helpers
       puts '====='
     end
 
-    def self.grid_print_custom(grid, values)
+    def self.convert_grid_custom(grid, values)
       min_x, _ = grid.min_by { |key, _| key.first }
       max_x, _ = grid.max_by { |key, _| key.first }
       min_y, _ = grid.min_by { |key, _| key.last }
       max_y, _ = grid.max_by { |key, _| key.last }
+
+      arr = []
 
       (min_y.last..max_y.last).reverse_each do |y|
         string = ''
@@ -49,9 +51,10 @@ module Helpers
           string += values[grid[[x, y]] || 0].split('').sample
         end
 
-        puts string
+        arr << string
       end
-      puts '====='
+
+      arr
     end
   end
 end

@@ -1,5 +1,6 @@
 require_relative 'lib/opcode.rb'
 require_relative './lib/printer.rb'
+require 'curses'
 
 module Solvers
   class Solver13
@@ -29,6 +30,8 @@ module Solvers
     end
 
     def solve_b(input, opts = {})
+      Curses.init_screen
+
       input = input.first.chomp.split(',').map(&:to_i)
       input[0] = 2
 
@@ -43,15 +46,32 @@ module Solvers
         input = find_x(grid, BALL) <=> find_x(grid, PADDLE)
 
         computer.resume(input: [input])
-        grid, new_score = build_map(computer.output, opts, grid)
+        grid, new_score, arr = build_map(computer.output, opts, grid)
 
         score = [score, new_score].max
-        puts score
+
+        print_game(arr, score)
 
         break if computer.state == Helpers::OpcodeComputer::HALT_STATE
       end
 
       score
+    ensure
+      Curses.close_screen
+    end
+
+    def print_game(arr, score)
+      i = 0
+
+      Curses.setpos(i, 0)  # Move the cursor to the center of the screen
+      Curses.addstr(score.to_s)
+
+      arr.each_with_index do |line, index|
+        Curses.setpos(index + 1, 0)  # Move the cursor to the center of the screen
+        Curses.addstr(line)
+      end
+
+      Curses.refresh
     end
 
     def build_map(output, opts, grid = {})
@@ -65,13 +85,13 @@ module Solvers
       end
 
       if opts.fetch(:print, true)
-        Helpers::Printer.grid_print_custom(
+        arr = Helpers::Printer.convert_grid_custom(
           grid,
           [' ', '▓', '◧◨◩◪', '═', '■']
         )
       end
 
-      [grid, score]
+      [grid, score, arr]
     end
 
     def find_x(grid, type)
