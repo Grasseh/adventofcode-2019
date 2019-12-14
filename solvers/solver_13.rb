@@ -30,7 +30,7 @@ module Solvers
     end
 
     def solve_b(input, opts = {})
-      Curses.init_screen
+      Curses.init_screen if print
 
       input = input.first.chomp.split(',').map(&:to_i)
       input[0] = 2
@@ -57,7 +57,7 @@ module Solvers
 
       score
     ensure
-      Curses.close_screen
+      Curses.close_screen if print
     end
 
     def print_game(arr, score)
