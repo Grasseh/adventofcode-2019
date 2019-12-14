@@ -50,7 +50,7 @@ module Solvers
 
         score = [score, new_score].max
 
-        print_game(arr, score)
+        print_game(arr, score) if print
 
         break if computer.state == Helpers::OpcodeComputer::HALT_STATE
       end
