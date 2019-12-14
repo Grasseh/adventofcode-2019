@@ -13,6 +13,9 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
+    - name: Set up packages
+      run: |
+        apt install libncurses5-dev -y
     - name: Build and test with Rspec
       run: |
         gem install bundler
