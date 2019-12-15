@@ -30,7 +30,7 @@ module Solvers
     end
 
     def solve_b(input, opts = {})
-      Curses.init_screen if print
+      Curses.init_screen if opts.fetch(:print, true)
 
       input = input.first.chomp.split(',').map(&:to_i)
       input[0] = 2
@@ -50,14 +50,14 @@ module Solvers
 
         score = [score, new_score].max
 
-        print_game(arr, score) if print
+        print_game(arr, score) if opts.fetch(:print, true)
 
         break if computer.state == Helpers::OpcodeComputer::HALT_STATE
       end
 
       score
     ensure
-      Curses.close_screen if print
+      Curses.close_screen if opts.fetch(:print, true)
     end
 
     def print_game(arr, score)
