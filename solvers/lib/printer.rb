@@ -36,7 +36,7 @@ module Helpers
       puts '====='
     end
 
-    def self.convert_grid_custom(grid, values)
+    def self.convert_grid_custom(grid, values, default = 0)
       min_x, _ = grid.min_by { |key, _| key.first }
       max_x, _ = grid.max_by { |key, _| key.first }
       min_y, _ = grid.min_by { |key, _| key.last }
@@ -48,7 +48,7 @@ module Helpers
         string = ''
 
         (min_x.first..max_x.first).each do |x|
-          string += values[grid[[x, y]] || 0].split('').sample
+          string += values[grid[[x, y]] || default].split('').sample
         end
 
         arr << string

@@ -15,24 +15,28 @@ module Helpers
         @operations[index] = method("op_#{index}".to_sym)
       end
 
+      @pointer = 0
+      @relative_pointer = 0
+      @program = program.dup
+      @input = []
+
       @base_program = program
     end
 
     def compute(opts = {})
-      @pointer = 0
-      @relative_pointer = 0
-      @program = @base_program.dup
-      @output = []
-      @input = []
-      @opts = opts
-      @state = RUNNING_STATE
-
-      resume(opts)
+      resume(opts, true)
 
       @program
     end
 
-    def resume(opts = {})
+    def resume(opts = {}, re_init = false)
+      if re_init
+        @pointer = 0
+        @relative_pointer = 0
+        @program = @base_program.dup
+        @opts = opts
+      end
+
       @input.concat(opts.fetch(:input, [])).flatten!
       @output = []
       @state = RUNNING_STATE

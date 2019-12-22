@@ -15,7 +15,6 @@ module Solvers
     PADDLE = 3
     BALL = 4
 
-
     def solve_a(input, opts = {})
       input = input.first.chomp.split(',').map(&:to_i)
 
